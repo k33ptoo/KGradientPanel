@@ -27,10 +27,10 @@ import javax.swing.JToolBar;
  */
 public class KGradientPanel extends JComponent {
 
-    public Color StartColor = Color.GREEN;
+    public Color StartColor = Color.MAGENTA;
     public Color EndColor = Color.BLUE;
     public boolean TransparentControls = true;
-    public int gradientFocus = 0;
+    public int gradientFocus = 500;
 
     public KGradientPanel() {
 
@@ -39,6 +39,8 @@ public class KGradientPanel extends JComponent {
         } else {
             setBg(false);
         }
+       
+        
     }
 
     @Override
@@ -48,6 +50,7 @@ public class KGradientPanel extends JComponent {
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         int w = getWidth();
         int h = getHeight();
+        
 
         GradientPaint gp = new GradientPaint(0, 0, StartColor, gradientFocus, h, EndColor);;
 
