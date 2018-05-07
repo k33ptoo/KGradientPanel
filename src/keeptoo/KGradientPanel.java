@@ -11,8 +11,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseMotionListener;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,22 +25,62 @@ import javax.swing.JToolBar;
  *
  * @author oXCToo
  */
-public class KGradientPanel extends JComponent {
+public class KGradientPanel extends JPanel {
 
-    public Color StartColor = Color.MAGENTA;
-    public Color EndColor = Color.BLUE;
-    public boolean TransparentControls = true;
-    public int gradientFocus = 500;
+    public Color kStartColor = Color.MAGENTA;
+    public Color kEndColor = Color.BLUE;
+    public boolean kTransparentControls = true;
+    public int kGradientFocus = 500;
+
+    public Color getkStartColor() {
+        return kStartColor;
+    }
+
+    public void setkStartColor(Color kStartColor) {
+        this.kStartColor = kStartColor;
+    }
+
+    public Color getkEndColor() {
+        return kEndColor;
+    }
+
+    public void setkEndColor(Color kEndColor) {
+        this.kEndColor = kEndColor;
+    }
+
+    public boolean iskTransparentControls() {
+        return kTransparentControls;
+    }
+
+    public void setkTransparentControls(boolean kTransparentControls) {
+        this.kTransparentControls = kTransparentControls;
+    }
+
+    public int getkGradientFocus() {
+        return kGradientFocus;
+    }
+
+    public void setkGradientFocus(int kGradientFocus) {
+        this.kGradientFocus = kGradientFocus;
+    }
+  
+ 
+    
+    
 
     public KGradientPanel() {
 
-        if (TransparentControls) {
+        if (kTransparentControls) {
             setBg(true);
         } else {
             setBg(false);
         }
-       
-        
+
+    }
+
+    @Override
+    public synchronized void addMouseMotionListener(MouseMotionListener l) {
+        super.addMouseMotionListener(l); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -50,48 +90,12 @@ public class KGradientPanel extends JComponent {
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         int w = getWidth();
         int h = getHeight();
-        
 
-        GradientPaint gp = new GradientPaint(0, 0, StartColor, gradientFocus, h, EndColor);;
+        GradientPaint gp = new GradientPaint(0, 0, kStartColor, kGradientFocus, h, kEndColor);;
 
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, w, h);
-    }
-
-    public Color getStartColor() {
-        return StartColor;
-    }
-
-    public void setStartColor(Color StartColor) {
-        this.StartColor = StartColor;
-        invalidate();
-    }
-
-    public Color getEndColor() {
-        return EndColor;
-    }
-
-    public void setEndColor(Color EndColor) {
-        this.EndColor = EndColor;
-        invalidate();
-    }
-
-    public int getGradientFocus() {
-        return gradientFocus;
-    }
-
-    public void setGradientFocus(int gradientFocus) {
-        this.gradientFocus = gradientFocus;
-        invalidate();
-    }
-
-    public boolean isTransparentControls() {
-        return TransparentControls;
-    }
-
-    public void setTransparentControls(boolean TransparentControls) {
-        this.TransparentControls = TransparentControls;
-        invalidate();
+        //g2d.dispose();
     }
 
     private void setBg(boolean isOpaque) {
